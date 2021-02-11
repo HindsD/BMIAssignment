@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMI Calculator</title>
+</head>
+<body>
+
+<h1>What's Your Body Mass Index?</h1>
+
+<form>
+    <br>
+
+    <label for="height">Height (in.)</label>
+    <input type="number" name="height" id="height"
+           min="59"  max="79" required>
+
+    <br>
+
+    <label for="weight">Weight (lbs.)</label>
+    <input type="number" name="weight" id="weight"
+           min="88" max="353" required>
+
+    <br>
+
+    <button>Calculate BMI</button>
+</form>
+<p id="BMIMsg"></p>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+    $(document).ready(function () {
+        //$("button").click(placeOrder);
+        $("form").submit(CalculateBMI);
+    });
+
+    function CalculateBMI(event) {
+        event.preventDefault(); //stops flashing form
+
+        // get value from apt number box
+        let height = parseInt($("input#height").val());
+        let weight = parseInt($("input#weight").val());
+
+        let bmi = ((weight*703)/(height*height)).toFixed(1);
+
+
+        //let msg = `Your order of ${qty} items has been placed.`;
+
+        if(bmi < 18.5){
+            $("p#BMIMsg").text("Underweight (BMI " + bmi +") at " + weight + " pounds.");
+        }
+        else if(bmi > 18.5 && bmi < 25){
+            $("p#BMIMsg").text("Normal (BMI " + bmi +") at " + weight + " pounds.");
+        }
+        else if(bmi > 25 && bmi < 30){
+            $("p#BMIMsg").text("Overweight (BMI " + bmi +") at " + weight + " pounds.");
+        }
+        else if(bmi > 30){
+            $("p#BMIMsg").text("Obese (BMI " + bmi +") at " + weight + " pounds.");
+        }
+
+    }
+</script>
+
+
+</html>
